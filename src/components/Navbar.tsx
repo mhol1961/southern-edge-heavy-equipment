@@ -69,7 +69,7 @@ export default function Navbar() {
               priority
             />
             <span className="hidden lg:block text-[10px] font-sans font-semibold uppercase tracking-[0.12em] text-brand-gray mt-0.5 group-hover:text-purple-accent transition-colors">
-              Screens, Belting, Parts &amp; Processing Equipment
+              Screens, Belting, Parts &amp; Material Processing Machines
             </span>
           </Link>
 
@@ -124,11 +124,11 @@ export default function Navbar() {
           {/* CTA + Phone + Mobile Menu */}
           <div className="flex items-center gap-3">
             <a
-              href="tel:1-800-234-789"
+              href="tel:1-800-234-7890"
               className="hidden xl:flex items-center gap-2 text-[13px] font-sans font-semibold text-brand-gray-light hover:text-purple-accent transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>1-800-234-789</span>
+              <span>1-800-234-7890</span>
             </a>
             <Link
               href="/contact"
@@ -223,11 +223,11 @@ export default function Navbar() {
               Get a Quote
             </Link>
             <a
-              href="tel:1-800-234-789"
+              href="tel:1-800-234-7890"
               className="flex items-center justify-center gap-2 w-full text-center font-heading font-bold uppercase tracking-wide text-brand-gray-light border border-brand-gray/30 rounded-lg py-3 mt-3 hover:border-purple-accent hover:text-purple-accent transition-colors"
             >
               <Phone className="w-4 h-4" />
-              Call 1-800-234-789
+              Call 1-800-234-7890
             </a>
           </div>
         </div>

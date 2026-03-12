@@ -63,7 +63,7 @@ export default function RootLayout({
             logo: "https://southernedgescreens.com/images/southernedgebusinessnameandlogo.png",
             description:
               "Screening media, conveyor belting, crusher parts, and material processing equipment supplier serving the Southeast US.",
-            telephone: "1-800-234-789",
+            telephone: "1-800-234-7890",
             email: "info@southernedgescreens.com",
             areaServed: {
               "@type": "GeoCircle",

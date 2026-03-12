@@ -186,8 +186,8 @@ export default function ListWithUsPage() {
   return (
     <>
       <PageHero
-        image="/images/southernedgefacebookpageimage.jpeg"
-        imageAlt="Heavy equipment yard with material processing machines"
+        image="/images/southernedgeequip1.JPG"
+        imageAlt="Material processing equipment at Southern Edge"
         label="Sell Your Equipment"
         title="List With Us"
         subtitle="Reach thousands of buyers across the Southeast. List your equipment with Southern Edge."
@@ -640,7 +640,7 @@ export default function ListWithUsPage() {
                   <button
                     onClick={handleSubmit}
                     disabled={!canProceed()}
-                    className="inline-flex items-center gap-2 px-8 py-3 font-heading font-bold uppercase text-sm tracking-wide text-white rounded-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+                    className="inline-flex items-center gap-2 px-8 py-3 font-heading font-bold uppercase text-sm tracking-wide text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(123,45,142,0.3)]"
                   >
                     <CheckCircle className="w-4 h-4" />
                     Submit Listing

@@ -44,7 +44,7 @@ export default function Footer() {
               className="h-14 w-auto mb-2"
             />
             <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.12em] text-brand-gray mb-4">
-              Screens, Belting, Parts &amp; Processing Equipment
+              Screens, Belting, Parts &amp; Material Processing Machines
             </p>
             <p className="text-[15px] text-brand-gray leading-relaxed mb-6">
               Your trusted source for screening media, conveyor belting, crusher parts,
@@ -52,13 +52,13 @@ export default function Footer() {
             </p>
             <div className="space-y-3">
               <a
-                href="tel:1-800-234-789"
+                href="tel:1-800-234-7890"
                 className="flex items-center gap-3 text-sm text-brand-gray-light hover:text-purple-accent transition-colors group"
               >
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple/15 group-hover:bg-purple/25 transition-colors">
                   <Phone className="w-3.5 h-3.5 text-purple-accent" />
                 </span>
-                1-800-234-789
+                1-800-234-7890
               </a>
               <a
                 href="mailto:info@southernedgescreens.com"

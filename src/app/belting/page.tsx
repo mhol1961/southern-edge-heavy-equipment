@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Phone, CheckCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionLabel from "@/components/SectionLabel";
@@ -70,7 +71,20 @@ export default function BeltingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {beltTypes.map((belt, i) => (
               <FadeIn key={belt.title} delay={i * 0.08}>
-                <div className="bg-brand-gray-dark rounded-lg border border-purple/20 p-6 h-full hover:border-purple/50 transition-colors">
+                <div className="bg-brand-gray-dark rounded-lg border border-purple/20 overflow-hidden h-full hover:border-purple/50 card-hover">
+                  {/* Image strip */}
+                  <div className="relative h-[140px] img-zoom">
+                    <Image
+                      src="/images/southernedgebelt1.JPG"
+                      alt={belt.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{ objectPosition: `center ${25 * i}%` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-gray-dark to-transparent" />
+                  </div>
+                  <div className="p-6">
                   <h3 className="font-heading font-bold text-xl uppercase text-white mb-3">
                     {belt.title}
                   </h3>
@@ -83,6 +97,7 @@ export default function BeltingPage() {
                       </li>
                     ))}
                   </ul>
+                  </div>
                 </div>
               </FadeIn>
             ))}
@@ -180,11 +195,11 @@ export default function BeltingPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <QuoteButton text="Get Belt Quote" size="lg" />
               <a
-                href="tel:1-800-234-789"
+                href="tel:1-800-234-7890"
                 className="inline-flex items-center gap-2 px-8 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Call 1-800-234-789
+                Call 1-800-234-7890
               </a>
             </div>
           </FadeIn>

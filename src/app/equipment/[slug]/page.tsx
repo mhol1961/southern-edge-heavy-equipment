@@ -64,7 +64,7 @@ export default function EquipmentDetailPage() {
   const handleTellAFriend = () => {
     const subject = encodeURIComponent(`Check out this ${item.name} at Southern Edge`);
     const body = encodeURIComponent(
-      `I found this ${item.name} listed at Southern Edge Screens & Belting.\n\nPrice: ${item.price}\nStatus: ${statusLabels[item.status]}\nStock #: ${item.stockNumber}\n\nView it here: ${typeof window !== "undefined" ? window.location.href : ""}\n\nContact Southern Edge at 1-800-234-789`
+      `I found this ${item.name} listed at Southern Edge Screens & Belting.\n\nPrice: ${item.price}\nStatus: ${statusLabels[item.status]}\nStock #: ${item.stockNumber}\n\nView it here: ${typeof window !== "undefined" ? window.location.href : ""}\n\nContact Southern Edge at 1-800-234-7890`
     );
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
@@ -209,7 +209,7 @@ export default function EquipmentDetailPage() {
                     Request Quote
                   </Link>
                   <a
-                    href="tel:1-800-234-789"
+                    href="tel:1-800-234-7890"
                     className="inline-flex items-center gap-2 px-6 py-3 font-heading font-bold uppercase tracking-wide text-white rounded-lg border border-brand-gray/30 hover:border-purple-accent transition-colors"
                   >
                     <Phone className="w-4 h-4" />
@@ -275,8 +275,8 @@ export default function EquipmentDetailPage() {
                   </h3>
                   <p className="text-brand-gray">
                     We&apos;ll get back to you within 24 hours. For urgent inquiries, call{" "}
-                    <a href="tel:1-800-234-789" className="text-purple-accent">
-                      1-800-234-789
+                    <a href="tel:1-800-234-7890" className="text-purple-accent">
+                      1-800-234-7890
                     </a>
                     .
                   </p>

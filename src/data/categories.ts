@@ -21,7 +21,7 @@ export const categories: Category[] = [
     name: "Crushers & Jaw Plates",
     slug: "crushers-jaw-plates",
     description: "Jaw crusher liners, blow bars, mantles & concaves",
-    image: "/images/heavyequipment1.JPG",
+    image: "/images/southernedgescreen4.JPG",
     icon: "Hammer",
     itemCount: 3,
   },

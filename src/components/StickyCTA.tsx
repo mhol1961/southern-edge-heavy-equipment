@@ -28,7 +28,7 @@ export default function StickyCTA() {
           Get a Quote
         </Link>
         <a
-          href="tel:1-800-234-789"
+          href="tel:1-800-234-7890"
           className="flex-1 text-center font-heading font-bold uppercase text-sm tracking-wide text-white rounded-lg border border-brand-gray/30 py-3 hover:border-purple-accent transition-colors"
         >
           Call Now

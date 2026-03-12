@@ -137,11 +137,11 @@ export default function PartsPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <QuoteButton text="Get Parts Quote" size="lg" />
               <a
-                href="tel:1-800-234-789"
+                href="tel:1-800-234-7890"
                 className="inline-flex items-center gap-2 px-8 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Call 1-800-234-789
+                Call 1-800-234-7890
               </a>
             </div>
           </FadeIn>

@@ -42,11 +42,11 @@ export default function PageHero({
               {label}
             </span>
           )}
-          <h1 className="font-heading font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tight text-white mb-4">
+          <h1 className="font-heading font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tight text-white mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             {title}
           </h1>
           {subtitle && (
-            <p className={`text-base sm:text-lg text-brand-gray leading-relaxed ${centered ? "max-w-2xl mx-auto" : "max-w-xl"}`}>
+            <p className={`text-base sm:text-lg text-brand-gray-light leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] ${centered ? "max-w-2xl mx-auto" : "max-w-xl"}`}>
               {subtitle}
             </p>
           )}

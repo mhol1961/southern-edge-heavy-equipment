@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, ArrowRight, Star, MapPin, Mail, Clock, Check } from "lucide-react";
+import { Phone, ArrowRight, Star, MapPin, Mail, Clock, Check, ChevronDown } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
 import EquipmentCard from "@/components/EquipmentCard";
@@ -96,11 +96,11 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="tel:1-800-234-789"
+                href="tel:1-800-234-7890"
                 className="btn-secondary inline-flex items-center gap-2 px-8 py-4 rounded-lg text-base"
               >
                 <Phone className="w-4 h-4" />
-                Call 1-800-234-789
+                Call 1-800-234-7890
               </a>
             </div>
 
@@ -149,6 +149,11 @@ export default function Home() {
                 View Details <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+            <ChevronDown className="w-6 h-6 text-white/40" />
           </div>
         </div>
       </section>
@@ -250,10 +255,10 @@ export default function Home() {
             </h2>
           </FadeIn>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {services.map((service, i) => (
               <FadeIn key={service.id} delay={i * 0.06}>
-                <div className="group relative bg-brand-gray-dark rounded-xl border border-purple/20 p-8 hover:border-purple/50 transition-all overflow-hidden">
+                <div className="group relative bg-brand-gray-dark rounded-xl border border-purple/20 p-8 md:p-10 hover:border-purple/50 transition-all overflow-hidden">
                   {/* Number as massive visual anchor */}
                   <div className="flex flex-col md:flex-row gap-6 md:gap-10">
                     <div className="shrink-0">
@@ -369,11 +374,11 @@ export default function Home() {
                 Request a Quote
               </Link>
               <a
-                href="tel:1-800-234-789"
+                href="tel:1-800-234-7890"
                 className="inline-flex items-center gap-2 px-8 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Call 1-800-234-789
+                Call 1-800-234-7890
               </a>
             </div>
           </FadeIn>
@@ -392,7 +397,7 @@ export default function Home() {
               </h2>
               <div className="space-y-5">
                 <a
-                  href="tel:1-800-234-789"
+                  href="tel:1-800-234-7890"
                   className="flex items-center gap-4 group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-purple/20 flex items-center justify-center group-hover:bg-purple/40 group-hover:shadow-[0_0_15px_rgba(123,45,142,0.3)] transition-all">
@@ -401,7 +406,7 @@ export default function Home() {
                   <div>
                     <p className="text-sm text-brand-gray">Phone</p>
                     <p className="font-heading font-bold text-white">
-                      1-800-234-789
+                      1-800-234-7890
                     </p>
                   </div>
                 </a>

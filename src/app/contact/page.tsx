@@ -118,13 +118,13 @@ function ContactPageInner() {
             <div className="lg:col-span-2">
               <FadeIn>
                 <div className="space-y-6">
-                  <a href="tel:1-800-234-789" className="flex items-center gap-4 group">
+                  <a href="tel:1-800-234-7890" className="flex items-center gap-4 group">
                     <div className="w-14 h-14 rounded-xl bg-purple/20 flex items-center justify-center group-hover:bg-purple/40 transition-colors shrink-0">
                       <Phone className="w-6 h-6 text-purple-accent" />
                     </div>
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-wide text-brand-gray">Phone</p>
-                      <p className="font-heading font-bold text-xl text-white">1-800-234-789</p>
+                      <p className="font-heading font-bold text-xl text-white">1-800-234-7890</p>
                     </div>
                   </a>
                   <a href="mailto:info@southernedgescreens.com" className="flex items-center gap-4 group">
@@ -155,9 +155,21 @@ function ContactPageInner() {
                     </div>
                   </div>
 
-                  {/* Map placeholder */}
-                  <div className="mt-8 rounded-xl bg-brand-gray-dark border border-purple/20 h-[200px] flex items-center justify-center">
-                    <p className="text-brand-gray text-sm">Map placeholder</p>
+                  {/* Service Area Map */}
+                  <div className="mt-8 rounded-xl bg-brand-gray-dark border border-purple/20 p-6">
+                    <h3 className="font-heading font-bold text-sm uppercase tracking-wide text-purple-accent mb-4">
+                      Southeast US Service Area
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["Alabama", "Georgia", "Tennessee", "Mississippi", "Florida", "South Carolina", "North Carolina", "Louisiana", "Arkansas", "Kentucky"].map((state) => (
+                        <span key={state} className="px-3 py-1.5 text-xs font-sans font-medium text-brand-gray-light bg-purple/10 border border-purple/20 rounded-full">
+                          {state}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-xs text-brand-gray mt-4">
+                      We serve operations throughout the Southeast United States with on-site service available.
+                    </p>
                   </div>
                 </div>
               </FadeIn>
@@ -178,8 +190,8 @@ function ContactPageInner() {
                       </p>
                       <p className="text-brand-gray text-sm">
                         For urgent needs, call us directly at{" "}
-                        <a href="tel:1-800-234-789" className="text-purple-accent">
-                          1-800-234-789
+                        <a href="tel:1-800-234-7890" className="text-purple-accent">
+                          1-800-234-7890
                         </a>
                         .
                       </p>
