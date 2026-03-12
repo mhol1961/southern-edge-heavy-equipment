@@ -41,7 +41,7 @@ export default function Footer() {
               alt="Southern Edge Screens & Belting"
               width={400}
               height={80}
-              className="h-14 w-auto mb-2"
+              className="h-[150px] w-auto mb-2"
             />
             <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.12em] text-brand-gray mb-4">
               Screens, Belting, Parts &amp; Material Processing Machines

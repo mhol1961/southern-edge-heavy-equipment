@@ -75,7 +75,7 @@ export default function Home() {
 
             {/* Subtext */}
             <p
-              className="mt-6 text-[17px] text-[#aaa] max-w-[480px] leading-relaxed animate-fade-in"
+              className="mt-6 text-[17px] text-brand-gray-light/80 max-w-[480px] leading-relaxed animate-fade-in"
               style={{ animationDelay: "0.35s" }}
             >
               Southern Edge supplies screening media, conveyor belting, crusher wear
@@ -201,7 +201,7 @@ export default function Home() {
                     <h3 className="font-heading font-bold text-xl uppercase text-white group-hover:text-purple-accent transition-colors leading-tight">
                       {cat.name}
                     </h3>
-                    <p className="text-sm text-brand-gray mt-2 leading-relaxed">
+                    <p className="text-sm text-brand-gray-light/60 mt-2 leading-relaxed">
                       {cat.description}
                     </p>
                     <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-purple-accent mt-4 group-hover:translate-x-1 transition-transform">
@@ -262,7 +262,7 @@ export default function Home() {
                   {/* Number as massive visual anchor */}
                   <div className="flex flex-col md:flex-row gap-6 md:gap-10">
                     <div className="shrink-0">
-                      <span className="font-heading font-bold text-[72px] md:text-[80px] leading-none text-purple/20 group-hover:text-purple/40 transition-colors">
+                      <span className="font-heading font-bold text-[72px] md:text-[80px] leading-none text-purple-accent/30 group-hover:text-purple-accent/50 transition-colors">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -270,7 +270,7 @@ export default function Home() {
                       <h3 className="font-heading font-bold text-2xl uppercase text-white group-hover:text-purple-accent transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-[15px] text-brand-gray mt-3 leading-relaxed max-w-2xl">
+                      <p className="text-[15px] text-brand-gray-light/70 mt-3 leading-relaxed max-w-2xl">
                         {service.description}
                       </p>
                       {/* 2-column bullet grid */}
@@ -325,7 +325,7 @@ export default function Home() {
                   </div>
                   <div className="relative z-10 p-8 flex flex-col h-full">
                     {/* Enormous quote mark */}
-                    <span className="absolute top-4 left-6 font-heading text-[120px] leading-none text-purple/15 select-none">
+                    <span className="absolute top-4 left-6 font-heading text-[120px] leading-none text-purple-accent/20 select-none">
                       &ldquo;
                     </span>
                     {/* Star rating */}
@@ -487,12 +487,12 @@ export default function Home() {
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg bg-brand-black-light border border-[#333] text-white placeholder:text-brand-gray focus:outline-none focus:border-purple transition-colors resize-none"
                   />
-                  <Link
-                    href="/contact"
-                    className="btn-primary flex items-center justify-center w-full py-4 rounded-lg text-base"
+                  <button
+                    type="submit"
+                    className="btn-primary flex items-center justify-center w-full py-4 rounded-lg text-base cursor-pointer"
                   >
                     Send Request
-                  </Link>
+                  </button>
                 </form>
               </div>
             </FadeIn>

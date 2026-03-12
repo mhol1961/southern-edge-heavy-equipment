@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 
@@ -25,9 +26,17 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const isActive = (href: string, children?: { href: string }[]) => {
+    if (href === "/") return pathname === "/";
+    if (pathname.startsWith(href)) return true;
+    if (children?.some((c) => pathname.startsWith(c.href))) return true;
+    return false;
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -50,102 +59,95 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0A0A0A]/95 backdrop-blur-md border-b border-purple/20 py-1"
-          : "bg-transparent py-3"
+          ? "bg-[#0A0A0A]/95 backdrop-blur-md border-b border-purple/20 shadow-lg shadow-black/20"
+          : "bg-[#0A0A0A]/80 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo — large, commanding */}
-          <Link href="/" className="flex flex-col shrink-0 group">
-            <Image
-              src="/images/southernedgebusinessnameandlogo.png"
-              alt="Southern Edge Screens & Belting"
-              width={400}
-              height={80}
-              className={`w-auto transition-all duration-300 ${
-                scrolled ? "h-12" : "h-14 lg:h-16"
-              }`}
-              priority
-            />
-            <span className="hidden lg:block text-[10px] font-sans font-semibold uppercase tracking-[0.12em] text-brand-gray mt-0.5 group-hover:text-purple-accent transition-colors">
-              Screens, Belting, Parts &amp; Material Processing Machines
-            </span>
-          </Link>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-[160px] flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/southernedgebusinessnameandlogo.png"
+            alt="Southern Edge Screens & Belting"
+            width={500}
+            height={100}
+            className="h-[150px] w-auto"
+            priority
+          />
+        </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div
-                  key={link.label}
-                  className="relative"
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  <Link
-                    href={link.href}
-                    className="flex items-center gap-1 px-3 py-2 text-[13px] font-sans font-semibold uppercase tracking-[0.04em] text-brand-gray-light hover:text-purple-accent transition-colors"
-                  >
-                    {link.label}
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
-                  </Link>
-                  <div
-                    className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
-                      dropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-                    }`}
-                  >
-                    <div className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-purple/30 rounded-lg py-2 min-w-[220px] shadow-2xl shadow-purple/10">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="flex items-center gap-3 px-5 py-3 text-[13px] font-sans font-medium text-brand-gray-light hover:text-white hover:bg-purple/10 transition-colors"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-purple-accent/50" />
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-0.5">
+          {navLinks.map((link) =>
+            link.children ? (
+              <div
+                key={link.label}
+                className="relative"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
                 <Link
-                  key={link.href}
                   href={link.href}
-                  className="px-3 py-2 text-[13px] font-sans font-semibold uppercase tracking-[0.04em] text-brand-gray-light hover:text-purple-accent transition-colors"
+                  className={`flex items-center gap-1 px-3 py-2 text-[13px] font-sans font-semibold uppercase tracking-[0.04em] hover:text-purple-accent transition-colors whitespace-nowrap ${isActive(link.href, link.children) ? "text-purple-accent" : "text-brand-gray-light"}`}
                 >
                   {link.label}
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
                 </Link>
-              )
-            )}
-          </div>
+                <div
+                  className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                    dropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                  }`}
+                >
+                  <div className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-purple/30 rounded-lg py-2 min-w-[220px] shadow-2xl shadow-purple/10">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="flex items-center gap-3 px-5 py-3 text-[13px] font-sans font-medium text-brand-gray-light hover:text-white hover:bg-purple/10 transition-colors"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-accent/50" />
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-3 py-2 text-[13px] font-sans font-semibold uppercase tracking-[0.04em] hover:text-purple-accent transition-colors whitespace-nowrap ${isActive(link.href) ? "text-purple-accent" : "text-brand-gray-light"}`}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+        </div>
 
-          {/* CTA + Phone + Mobile Menu */}
-          <div className="flex items-center gap-3">
-            <a
-              href="tel:1-800-234-7890"
-              className="hidden xl:flex items-center gap-2 text-[13px] font-sans font-semibold text-brand-gray-light hover:text-purple-accent transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              <span>1-800-234-7890</span>
-            </a>
-            <Link
-              href="/contact"
-              className="hidden md:inline-flex items-center px-6 py-2.5 text-sm font-heading font-bold uppercase tracking-[0.06em] text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark border border-white/15 hover:from-purple-light hover:to-purple transition-all hover:shadow-[0_0_25px_rgba(123,45,142,0.4),0_0_50px_rgba(123,45,142,0.15)] active:scale-95"
-            >
-              Get a Quote
-            </Link>
+        {/* Phone + CTA */}
+        <div className="flex items-center gap-6 shrink-0">
+          <a
+            href="tel:1-800-234-7890"
+            className="hidden xl:inline-flex items-center gap-2.5 px-5 py-2.5 text-[16px] font-sans font-semibold text-white rounded-lg border border-brand-gray/30 hover:border-purple-accent hover:text-purple-accent transition-all whitespace-nowrap"
+          >
+            <Phone className="w-5 h-5 text-purple-accent" />
+            1-800-234-7890
+          </a>
+          <Link
+            href="/contact"
+            className="hidden md:inline-flex items-center px-8 py-3 text-[16px] font-heading font-bold uppercase tracking-[0.05em] text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark border border-white/15 hover:from-purple-light hover:to-purple transition-all hover:shadow-[0_0_20px_rgba(123,45,142,0.4)] whitespace-nowrap"
+          >
+            Get a Quote
+          </Link>
 
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="lg:hidden p-2 text-brand-gray-light hover:text-white transition-colors"
-              aria-label="Open menu"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="lg:hidden p-2 text-brand-gray-light hover:text-white transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </div>
 
@@ -168,8 +170,8 @@ export default function Navbar() {
             <Image
               src="/images/southernedgebusinessnameandlogo.png"
               alt="Southern Edge"
-              width={320}
-              height={64}
+              width={300}
+              height={60}
               className="h-10 w-auto"
             />
             <button
@@ -207,7 +209,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-6 py-3 text-base font-medium text-brand-gray-light hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px]"
+                  className={`flex items-center px-6 py-3 text-base font-medium hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px] ${isActive(link.href) ? "text-purple-accent bg-purple/5" : "text-brand-gray-light"}`}
                 >
                   {link.label}
                 </Link>
