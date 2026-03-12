@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import StickyCTA from "@/components/StickyCTA";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -50,7 +53,10 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${inter.variable} font-sans antialiased bg-[#0A0A0A] text-white`}
       >
-        {children}
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+        <StickyCTA />
       </body>
     </html>
   );
