@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -35,6 +34,18 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <nav
@@ -108,82 +119,92 @@ export default function Navbar() {
             </Link>
 
             {/* Mobile hamburger */}
-            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-              <SheetTrigger
-                className="lg:hidden p-2 text-brand-gray-light hover:text-white transition-colors"
-                aria-label="Open menu"
-              >
-                <Menu className="w-6 h-6" />
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-[300px] bg-[#0A0A0A] border-l border-purple/20 p-0"
-              >
-                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center justify-between p-4 border-b border-purple/20">
-                    <Image
-                      src="/images/southernedgebusinessnameandlogo.png"
-                      alt="Southern Edge"
-                      width={160}
-                      height={32}
-                      className="h-8 w-auto"
-                    />
-                    <button
-                      onClick={() => setMobileOpen(false)}
-                      className="p-2 text-brand-gray hover:text-white"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                  <nav className="flex-1 py-4">
-                    {navLinks.map((link) =>
-                      link.children ? (
-                        <div key={link.label}>
-                          <span className="block px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-purple-accent">
-                            {link.label}
-                          </span>
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="block px-8 py-3 text-base font-medium text-brand-gray-light hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px] flex items-center"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      ) : (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="block px-6 py-3 text-base font-medium text-brand-gray-light hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px] flex items-center"
-                        >
-                          {link.label}
-                        </Link>
-                      )
-                    )}
-                  </nav>
-                  <div className="p-4 border-t border-purple/20">
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden p-2 text-brand-gray-light hover:text-white transition-colors"
+              aria-label="Open menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile slide-in overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Mobile slide-in panel */}
+      <div
+        className={`fixed top-0 right-0 z-50 h-full w-[300px] bg-[#0A0A0A] border-l border-purple/20 transform transition-transform duration-300 ease-in-out lg:hidden ${
+          mobileOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between p-4 border-b border-purple/20">
+            <Image
+              src="/images/southernedgebusinessnameandlogo.png"
+              alt="Southern Edge"
+              width={160}
+              height={32}
+              className="h-8 w-auto"
+            />
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="p-2 text-brand-gray hover:text-white"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <nav className="flex-1 py-4 overflow-y-auto">
+            {navLinks.map((link) =>
+              link.children ? (
+                <div key={link.label}>
+                  <span className="block px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-purple-accent">
+                    {link.label}
+                  </span>
+                  {link.children.map((child) => (
                     <Link
-                      href="/contact"
+                      key={child.href}
+                      href={child.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block w-full text-center font-heading font-bold uppercase tracking-wide text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark py-3 hover:shadow-[0_0_20px_rgba(123,45,142,0.3)] transition-all"
+                      className="flex items-center px-8 py-3 text-base font-medium text-brand-gray-light hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px]"
                     >
-                      Get a Quote
+                      {child.label}
                     </Link>
-                    <a
-                      href="tel:1-800-234-789"
-                      className="block w-full text-center font-heading font-bold uppercase tracking-wide text-brand-gray-light border border-brand-gray/30 rounded-lg py-3 mt-3 hover:border-purple-accent transition-colors"
-                    >
-                      Call 1-800-234-789
-                    </a>
-                  </div>
+                  ))}
                 </div>
-              </SheetContent>
-            </Sheet>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center px-6 py-3 text-base font-medium text-brand-gray-light hover:text-purple-accent hover:bg-purple/10 transition-colors min-h-[44px]"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+          </nav>
+          <div className="p-4 border-t border-purple/20">
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="block w-full text-center font-heading font-bold uppercase tracking-wide text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark py-3 hover:shadow-[0_0_20px_rgba(123,45,142,0.3)] transition-all"
+            >
+              Get a Quote
+            </Link>
+            <a
+              href="tel:1-800-234-789"
+              className="block w-full text-center font-heading font-bold uppercase tracking-wide text-brand-gray-light border border-brand-gray/30 rounded-lg py-3 mt-3 hover:border-purple-accent transition-colors"
+            >
+              Call 1-800-234-789
+            </a>
           </div>
         </div>
       </div>
