@@ -7,6 +7,7 @@ import { ChevronRight, Calendar, Clock, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
 import { blogPosts } from "@/data/blogPosts";
 
 const allCategories = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category)))];
@@ -21,24 +22,14 @@ export default function BlogPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">Blog</span>
-          </nav>
-          <SectionLabel text="Insights & Guides" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            Blog
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl">
-            Industry insights, maintenance guides, and product knowledge from our team.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgescreen1.JPG"
+        imageAlt="Woven wire screening media for aggregate processing"
+        label="Industry Insights"
+        title="Blog"
+        subtitle="Expert articles on screening media, conveyor belting, crusher parts, and equipment maintenance."
+        compact
+      />
 
       <section className="py-16 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

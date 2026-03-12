@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
 
 const inquiryTypes = [
   { value: "quote", label: "Quote Request", desc: "General pricing inquiry" },
@@ -101,25 +102,14 @@ function ContactPageInner() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">Contact</span>
-          </nav>
-          <SectionLabel text="Get In Touch" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            Contact Us
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl">
-            Ready to get a quote or have a question? Reach out by phone, email, or fill
-            out our form below.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgeequip1.JPG"
+        imageAlt="Material processing equipment at Southern Edge"
+        label="Get In Touch"
+        title="Contact Us"
+        subtitle="Request a quote, ask a question, or schedule a consultation with our team."
+        compact
+      />
 
       <section className="py-16 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

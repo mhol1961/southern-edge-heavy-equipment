@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
+import PageHero from "@/components/PageHero";
 
 const steps = [
   { label: "Your Info", icon: ClipboardList },
@@ -184,25 +185,14 @@ export default function ListWithUsPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">List With Us</span>
-          </nav>
-          <SectionLabel text="Equipment Marketplace" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            List Your Equipment With Us
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl">
-            Reach thousands of buyers across the Southeast. We handle the marketing, you
-            handle the sale.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgefacebookpageimage.jpeg"
+        imageAlt="Heavy equipment yard with material processing machines"
+        label="Sell Your Equipment"
+        title="List With Us"
+        subtitle="Reach thousands of buyers across the Southeast. List your equipment with Southern Edge."
+        compact
+      />
 
       {/* How it works */}
       <section className="py-16 bg-[#0A0A0A]">

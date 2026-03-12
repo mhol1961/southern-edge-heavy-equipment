@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
-import { ChevronRight, SlidersHorizontal, LayoutGrid, List } from "lucide-react";
-import SectionLabel from "@/components/SectionLabel";
+import { SlidersHorizontal, LayoutGrid, List } from "lucide-react";
+import PageHero from "@/components/PageHero";
 import FadeIn from "@/components/FadeIn";
 import EquipmentCard from "@/components/EquipmentCard";
 import { equipment } from "@/data/equipment";
@@ -70,29 +69,14 @@ export default function EquipmentPage() {
 
   return (
     <>
-      {/* Hero banner */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">
-              Home
-            </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">Equipment</span>
-          </nav>
-          <SectionLabel text="Browse Our Inventory" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white">
-            Equipment
-          </h1>
-          <p className="text-brand-gray mt-3 max-w-2xl">
-            Browse our inventory of crushers, screens, conveyors, and processing
-            machines. Filter by category, status, or manufacturer to find what you
-            need.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgeheavyequipment3.JPG"
+        imageAlt="Heavy equipment at Southern Edge — crushers, screens, and processing machines"
+        label="Our Inventory"
+        title="Equipment for Sale"
+        subtitle="Browse our selection of crushers, screens, conveyors, and material processing equipment."
+        compact
+      />
 
       <section className="py-12 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -3,31 +3,20 @@ import { ChevronRight, Phone, CheckCircle } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
 import QuoteButton from "@/components/QuoteButton";
+import PageHero from "@/components/PageHero";
 import { services } from "@/data/services";
 
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="absolute inset-0 grid-pattern" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">Services</span>
-          </nav>
-          <SectionLabel text="What We Do" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            Our Services
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl">
-            From screen media selection to on-site installation, we provide end-to-end
-            support for aggregate, mining, and recycling operations.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgeheavyequipment3.JPG"
+        imageAlt="Southern Edge field service and equipment maintenance"
+        label="What We Do"
+        title="Our Services"
+        subtitle="From screen media installation to equipment brokerage — we keep your operation running."
+        compact
+      />
 
       {/* Services detail */}
       <section className="py-24 bg-[#0A0A0A]">

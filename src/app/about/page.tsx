@@ -3,6 +3,7 @@ import { ChevronRight, MapPin, Users, Shield, Award } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
 import QuoteButton from "@/components/QuoteButton";
+import PageHero from "@/components/PageHero";
 
 const values = [
   {
@@ -56,26 +57,14 @@ const serviceStates = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-brand-black-light">
-        <div className="absolute inset-0 purple-radial-gradient opacity-50" />
-        <div className="absolute inset-0 grid-pattern" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">About</span>
-          </nav>
-          <SectionLabel text="Our Story" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            About Southern Edge
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl">
-            Your trusted partner for screening media, conveyor belting, crusher parts,
-            and material processing equipment in the Southeast.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgeheavyequipment2.jpeg"
+        imageAlt="Pegson XA400S Mobile Jaw Crusher — Southern Edge Equipment"
+        label="Our Story"
+        title="About Southern Edge"
+        subtitle="Your trusted partner for screening media, conveyor belting, and material processing equipment in the Southeast."
+        compact
+      />
 
       {/* Story */}
       <section className="py-24 bg-[#0A0A0A]">

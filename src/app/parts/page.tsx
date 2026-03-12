@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight, Phone, CheckCircle } from "lucide-react";
+import { Phone, CheckCircle } from "lucide-react";
+import PageHero from "@/components/PageHero";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
 import QuoteButton from "@/components/QuoteButton";
@@ -58,35 +57,14 @@ const supportedBrands = [
 export default function PartsPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/southernedgescreen4.JPG"
-            alt="Jaw crusher interior showing manganese wear plates"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]/70" />
-          <div className="absolute inset-0 purple-radial-gradient opacity-40" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-brand-gray mb-6">
-            <Link href="/" className="hover:text-purple-accent transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-brand-white">Crusher Parts</span>
-          </nav>
-          <SectionLabel text="Products" />
-          <h1 className="font-heading font-bold text-[clamp(36px,5vw,56px)] uppercase tracking-tight text-white mb-4">
-            Crusher Parts & Wear Components
-          </h1>
-          <p className="text-lg text-brand-gray max-w-2xl leading-relaxed">
-            Premium replacement wear parts for all major crusher brands. Jaw plates, blow
-            bars, mantles, concaves, and more — in stock for common models.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image="/images/southernedgescreen4.JPG"
+        imageAlt="Jaw crusher interior with manganese wear plates"
+        label="Products"
+        title="Crusher Parts"
+        subtitle="Premium replacement wear parts for all major crusher brands — jaw plates, blow bars, mantles, and concaves."
+        compact
+      />
 
       {/* Part types */}
       <section className="py-24 bg-brand-black-light">
