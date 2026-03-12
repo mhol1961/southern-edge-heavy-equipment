@@ -7,6 +7,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://southernedgescreen
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: `${BASE_URL}`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1.0 },
+    { url: `${BASE_URL}/products`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.85 },
     { url: `${BASE_URL}/equipment`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
     { url: `${BASE_URL}/screens`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${BASE_URL}/belting`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },

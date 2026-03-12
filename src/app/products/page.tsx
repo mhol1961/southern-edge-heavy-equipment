@@ -1,0 +1,183 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import PageHero from "@/components/PageHero";
+import FadeIn from "@/components/FadeIn";
+import SectionLabel from "@/components/SectionLabel";
+
+export const metadata: Metadata = {
+  title: "Products | Southern Edge Screens & Belting",
+  description:
+    "Browse our full range of screening media, conveyor belting, crusher parts, and material processing equipment for aggregate, mining, and recycling operations.",
+};
+
+const productCategories = [
+  {
+    title: "Screening Media",
+    href: "/screens",
+    image: "/images/southernedgescreen2.JPG",
+    description:
+      "Woven wire, polyurethane, rubber, perforated plate, self-cleaning, and expanded metal screen panels. We supply screening media for every application — from fine sand to heavy aggregate.",
+    features: ["Woven Wire Cloth", "Polyurethane Panels", "Rubber Screens", "Perforated Plate", "Self-Cleaning Wire", "Expanded Metal"],
+  },
+  {
+    title: "Conveyor Belting",
+    href: "/belting",
+    image: "/images/southernedgebelt1.JPG",
+    description:
+      "Heavy-duty conveyor belts for material processing — chevron, cleated, ribbed, and specialty belts. We stock a wide range of widths and grades for immediate delivery and on-site installation.",
+    features: ["Chevron Belts", "Cleated Belts", "Heavy-Duty Rubber", "Specialty Belts", "Splicing & Repair", "Custom Widths"],
+  },
+  {
+    title: "Crusher Parts",
+    href: "/parts",
+    image: "/images/southernedgescreen4.JPG",
+    description:
+      "Premium replacement wear parts for all major crusher brands. Jaw plates, blow bars, mantles, concaves, and cheek plates in manganese and high-chrome alloys for maximum wear life.",
+    features: ["Jaw Plates", "Blow Bars", "Mantles & Concaves", "Cheek Plates", "Toggle Plates", "OEM & Aftermarket"],
+  },
+];
+
+const equipmentCategories = [
+  { name: "Mobile Crushers", href: "/equipment?category=mobile-crushers", image: "/images/southernedgeheavyequipment2.jpeg" },
+  { name: "Screening Plants", href: "/equipment?category=screening-plants", image: "/images/southernedgescreen1.JPG" },
+  { name: "Conveyor Systems", href: "/equipment?category=conveyor-systems", image: "/images/southernedgebelt1.JPG" },
+  { name: "Processing Machines", href: "/equipment?category=processing-machines", image: "/images/southernedgeequip1.JPG" },
+];
+
+export default function ProductsPage() {
+  return (
+    <>
+      <PageHero
+        image="/images/southernedgescreen5.jpeg"
+        imageAlt="Screen media panels for aggregate and mining applications"
+        label="Our Products"
+        title="Products"
+        subtitle="Screening media, conveyor belting, crusher parts, and complete material processing equipment."
+        compact
+      />
+
+      {/* Product Category Feature Cards */}
+      <section className="py-24 bg-brand-black-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionLabel text="Product Lines" />
+            <h2 className="font-heading font-bold text-[clamp(32px,4.5vw,56px)] uppercase tracking-tight text-white mb-16">
+              What We Supply
+            </h2>
+          </FadeIn>
+
+          <div className="space-y-8">
+            {productCategories.map((cat, i) => (
+              <FadeIn key={cat.href} delay={i * 0.1}>
+                <Link href={cat.href} className="group block">
+                  <div className="relative rounded-xl overflow-hidden border border-purple/20 card-hover">
+                    {/* Large image */}
+                    <div className="relative h-[300px] sm:h-[360px] img-zoom">
+                      <Image
+                        src={cat.image}
+                        alt={cat.title}
+                        fill
+                        className="object-cover"
+                        sizes="100vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/70 to-transparent" />
+                    </div>
+
+                    {/* Content overlaid on image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
+                      <span className="text-[11px] font-sans font-semibold uppercase tracking-[0.15em] text-purple-accent">
+                        {i === 0 ? "Screens & Media" : i === 1 ? "Belting" : "Wear Parts"}
+                      </span>
+                      <h3 className="font-heading font-bold text-3xl sm:text-4xl uppercase text-white mt-2 group-hover:text-purple-accent transition-colors">
+                        {cat.title}
+                      </h3>
+                      <p className="text-[15px] text-brand-gray-light mt-3 max-w-2xl leading-relaxed">
+                        {cat.description}
+                      </p>
+                      {/* Feature chips */}
+                      <div className="flex flex-wrap gap-2 mt-5">
+                        {cat.features.map((f) => (
+                          <span
+                            key={f}
+                            className="px-3 py-1 text-xs font-sans font-medium text-brand-gray-light bg-white/10 backdrop-blur-sm rounded-full border border-white/10"
+                          >
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-2 mt-6 text-sm font-heading font-bold uppercase tracking-wide text-purple-accent group-hover:text-purple-light group-hover:translate-x-1 transition-all">
+                        View Products <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Equipment Quick Links */}
+      <section className="py-24 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionLabel text="Equipment" />
+            <h2 className="font-heading font-bold text-[clamp(28px,4vw,48px)] uppercase tracking-tight text-white mb-12">
+              Browse Equipment by Category
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {equipmentCategories.map((cat, i) => (
+              <FadeIn key={cat.name} delay={i * 0.08}>
+                <Link href={cat.href} className="group block rounded-lg overflow-hidden border border-purple/20 card-hover">
+                  <div className="relative h-[200px] img-zoom">
+                    <Image
+                      src={cat.image}
+                      alt={cat.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+                  </div>
+                  <div className="relative -mt-6 z-10 px-4 pb-4">
+                    <h3 className="font-heading font-bold text-base uppercase text-white group-hover:text-purple-accent transition-colors">
+                      {cat.name}
+                    </h3>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-dark to-purple" />
+        <div className="absolute inset-0 stripe-texture" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+          <FadeIn>
+            <h2 className="font-heading font-bold text-[clamp(28px,4vw,44px)] uppercase text-white mb-6">
+              Can&apos;t Find What You Need?
+            </h2>
+            <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+              Our team can source any screening media, belting, crusher parts, or equipment you need.
+              Contact us for a custom quote.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg"
+            >
+              Contact Us
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+    </>
+  );
+}
