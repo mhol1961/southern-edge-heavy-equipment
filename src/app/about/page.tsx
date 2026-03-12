@@ -176,7 +176,7 @@ export default function AboutPage() {
             <p className="text-lg text-white/80 mb-8">
               Contact our team to discuss your screening, belting, parts, or equipment needs.
             </p>
-            <QuoteButton text="Contact Us" className="bg-white text-purple-dark hover:bg-brand-gray-light from-white to-white" size="lg" />
+            <Link href="/contact" className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg text-base">Contact Us</Link>
           </FadeIn>
         </div>
       </section>

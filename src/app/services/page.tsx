@@ -69,7 +69,7 @@ export default function ServicesPage() {
               crushing needs.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <QuoteButton text="Request Service" className="bg-white text-purple-dark hover:bg-brand-gray-light from-white to-white" />
+              <Link href="/contact" className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg">Request Service</Link>
               <a
                 href="tel:1-800-234-789"
                 className="inline-flex items-center gap-2 px-8 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors"

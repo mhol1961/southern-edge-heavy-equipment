@@ -169,7 +169,7 @@ export default function BlogPostPage() {
                   <h2 className="font-heading font-bold text-2xl uppercase text-white mb-3">Need Equipment or Parts?</h2>
                   <p className="text-white/80 mb-6">Get a free quote from our team. We stock screen media, belting, and crusher parts for immediate delivery.</p>
                   <div className="flex flex-wrap justify-center gap-4">
-                    <QuoteButton text="Get a Free Quote" className="bg-white text-purple-dark hover:bg-brand-gray-light from-white to-white" />
+                    <Link href="/contact" className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg">Get a Free Quote</Link>
                     <a href="tel:1-800-234-789" className="inline-flex items-center gap-2 px-6 py-3 font-heading font-bold uppercase text-sm text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors">
                       <Phone className="w-4 h-4" />Call Us
                     </a>
