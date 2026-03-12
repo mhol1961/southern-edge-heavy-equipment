@@ -3,6 +3,7 @@ import { Oswald, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -53,6 +54,29 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${inter.variable} font-sans antialiased bg-[#0A0A0A] text-white`}
       >
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Southern Edge Screens & Belting",
+            url: "https://southernedgescreens.com",
+            logo: "https://southernedgescreens.com/images/southernedgebusinessnameandlogo.png",
+            description:
+              "Screening media, conveyor belting, crusher parts, and material processing equipment supplier serving the Southeast US.",
+            telephone: "1-800-234-789",
+            email: "info@southernedgescreens.com",
+            areaServed: {
+              "@type": "GeoCircle",
+              geoMidpoint: { "@type": "GeoCoordinates", latitude: 33.5, longitude: -86.8 },
+              geoRadius: "500 mi",
+            },
+            sameAs: [
+              "https://facebook.com/southernedgescreens",
+              "https://instagram.com/southernedgescreens",
+              "https://linkedin.com/company/southern-edge-screens",
+            ],
+          }}
+        />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
