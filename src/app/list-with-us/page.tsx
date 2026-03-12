@@ -198,12 +198,19 @@ export default function ListWithUsPage() {
       <section className="py-16 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
               {howItWorks.map((item, i) => (
-                <div key={item.title} className="text-center">
+                <div key={item.title} className="text-center relative">
                   <div className="w-16 h-16 mx-auto rounded-xl bg-purple/20 flex items-center justify-center mb-4">
                     <item.icon className="w-7 h-7 text-purple-accent" />
                   </div>
+                  {/* Connector line to next step */}
+                  {i < howItWorks.length - 1 && (
+                    <div className="hidden lg:block absolute top-8 left-[calc(50%+40px)] w-[calc(100%-80px)] right-0">
+                      <div className="w-full border-t-2 border-dashed border-purple/40" />
+                      <ChevronRight className="absolute -right-3 -top-[10px] w-5 h-5 text-purple/60" />
+                    </div>
+                  )}
                   <div className="text-xs font-semibold uppercase tracking-[0.12em] text-purple-accent mb-2">
                     Step {i + 1}
                   </div>
@@ -642,6 +649,66 @@ export default function ListWithUsPage() {
               </div>
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Recently Listed Equipment */}
+      <section className="py-20 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <SectionLabel text="Success Stories" />
+              <h2 className="font-heading font-bold text-3xl sm:text-4xl uppercase text-white tracking-tight mt-3 mb-4">
+                Recently Listed Equipment
+              </h2>
+              <p className="text-brand-gray max-w-2xl mx-auto">
+                Join 50+ equipment owners who list with Southern Edge
+              </p>
+            </div>
+          </FadeIn>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { name: "2019 McCloskey J45 Jaw Crusher", status: "LISTED", time: "Listed 2 days ago", price: "$185,000", image: "/images/southernedgeheavyequipment2.jpeg" },
+              { name: "Terex Finlay 883+ Triple Deck Screen", status: "PENDING REVIEW", time: "Listed 5 days ago", price: "$92,000", image: "/images/southernedgescreen2.JPG" },
+              { name: "2021 Sandvik QJ341 Mobile Crusher", status: "LISTED", time: "Listed 1 week ago", price: "$245,000", image: "/images/southernedgeheavyequipment3.JPG" },
+            ].map((listing, i) => (
+              <FadeIn key={listing.name} delay={i * 0.1}>
+                <div className="bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden hover:border-purple/60 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,45,142,0.15)]">
+                  <div className="relative h-[200px]">
+                    <Image
+                      src={listing.image}
+                      alt={listing.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span
+                        className={`inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded-full ${
+                          listing.status === "LISTED"
+                            ? "bg-green-500/90 text-white"
+                            : "bg-amber-500/90 text-white"
+                        }`}
+                      >
+                        {listing.status}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-heading font-bold text-base uppercase text-white mb-2 leading-tight">
+                      {listing.name}
+                    </h3>
+                    <p className="text-xl font-heading font-bold text-purple-accent mb-2">
+                      {listing.price}
+                    </p>
+                    <p className="text-xs text-brand-gray">
+                      {listing.time}
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
     </>

@@ -146,7 +146,7 @@ export default function ScreensPage() {
               us or request a free consultation.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <QuoteButton text="Free Consultation" className="bg-white text-purple-dark hover:bg-brand-gray-light from-white to-white" />
+              <QuoteButton text="Free Consultation" size="lg" />
               <a
                 href="tel:1-800-234-789"
                 className="inline-flex items-center gap-2 px-8 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg border-2 border-white/30 hover:border-white transition-colors"

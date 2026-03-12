@@ -100,9 +100,9 @@ export default function AboutPage() {
                 {values.map((v) => (
                   <div
                     key={v.title}
-                    className="bg-brand-gray-dark rounded-lg border border-purple/20 p-5 hover:border-purple/50 transition-colors"
+                    className="bg-brand-gray-dark rounded-lg border border-purple/20 p-5 hover:border-purple/50 hover:shadow-[0_0_15px_rgba(123,45,142,0.25)] transition-all"
                   >
-                    <v.icon className="w-8 h-8 text-purple-accent mb-3" />
+                    <v.icon className="w-10 h-10 text-purple-accent mb-3" />
                     <h3 className="font-heading font-bold text-sm uppercase text-white mb-2">
                       {v.title}
                     </h3>
@@ -129,8 +129,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {brands.map((brand, i) => (
               <FadeIn key={brand} delay={i * 0.06}>
-                <div className="bg-brand-gray-dark rounded-lg border border-purple/20 p-6 text-center hover:border-purple/50 transition-colors">
-                  <span className="font-heading font-bold text-lg uppercase text-brand-white">
+                <div className="bg-brand-gray-dark rounded-lg border border-purple/20 px-8 py-7 text-center hover:border-purple/50 transition-colors">
+                  <span className="font-heading font-bold text-xl uppercase text-brand-white">
                     {brand}
                   </span>
                 </div>

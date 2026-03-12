@@ -378,23 +378,21 @@ function ContactPageInner() {
                       )}
 
                       {/* Navigation */}
-                      <div className="flex justify-between mt-8 pt-6 border-t border-purple/10">
-                        {step > 0 ? (
+                      <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-purple/10">
+                        {step > 0 && (
                           <button
                             onClick={() => setStep(step - 1)}
-                            className="inline-flex items-center gap-2 px-5 py-3 font-heading font-bold uppercase text-sm text-brand-gray-light rounded-lg border border-brand-gray/30 hover:border-purple-accent transition-colors"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-3 font-heading font-bold uppercase text-sm text-brand-gray-light rounded-lg border border-brand-gray/30 hover:border-purple-accent transition-colors"
                           >
                             <ArrowLeft className="w-4 h-4" />
                             Back
                           </button>
-                        ) : (
-                          <div />
                         )}
                         {step < 3 ? (
                           <button
                             onClick={() => setStep(step + 1)}
                             disabled={!canProceed()}
-                            className="inline-flex items-center gap-2 px-6 py-3 font-heading font-bold uppercase text-sm text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="w-full inline-flex items-center justify-center gap-2 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple hover:shadow-[0_0_20px_rgba(123,45,142,0.3)] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                           >
                             Continue
                             <ArrowRight className="w-4 h-4" />
@@ -403,7 +401,7 @@ function ContactPageInner() {
                           <button
                             onClick={handleSubmit}
                             disabled={loading}
-                            className="inline-flex items-center gap-2 px-8 py-3 font-heading font-bold uppercase text-sm text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple transition-all hover:shadow-[0_0_24px_rgba(123,45,142,0.4)] disabled:opacity-50"
+                            className="w-full inline-flex items-center justify-center gap-2 py-4 font-heading font-bold uppercase tracking-wide text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple hover:shadow-[0_0_20px_rgba(123,45,142,0.3)] transition-all disabled:opacity-50"
                           >
                             <Mail className="w-4 h-4" />
                             {loading ? "Sending..." : "Send Message"}

@@ -82,8 +82,8 @@ export default function EquipmentPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-4 lg:gap-8">
             {/* Filter sidebar — desktop */}
-            <aside className="hidden lg:block">
-              <div className="sticky top-24 space-y-8">
+            <aside className="hidden lg:block lg:self-start">
+              <div className="sticky top-28 space-y-8">
                 {/* Categories */}
                 <div>
                   <h3 className="font-heading font-bold text-sm uppercase tracking-wide text-brand-white mb-4">
