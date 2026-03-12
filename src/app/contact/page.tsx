@@ -75,8 +75,25 @@ function ContactPageInner() {
     }
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
@@ -395,10 +412,11 @@ function ContactPageInner() {
                         ) : (
                           <button
                             onClick={handleSubmit}
-                            className="inline-flex items-center gap-2 px-8 py-3 font-heading font-bold uppercase text-sm text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple transition-all hover:shadow-[0_0_24px_rgba(123,45,142,0.4)]"
+                            disabled={loading}
+                            className="inline-flex items-center gap-2 px-8 py-3 font-heading font-bold uppercase text-sm text-white rounded-lg bg-gradient-to-r from-purple to-purple-dark hover:from-purple-light hover:to-purple transition-all hover:shadow-[0_0_24px_rgba(123,45,142,0.4)] disabled:opacity-50"
                           >
                             <Mail className="w-4 h-4" />
-                            Send Message
+                            {loading ? "Sending..." : "Send Message"}
                           </button>
                         )}
                       </div>
