@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import JsonLd from "@/components/JsonLd";
 import ScrollProgress from "@/components/ScrollProgress";
-import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -82,7 +81,7 @@ export default function RootLayout({
         <ScrollProgress />
         <Navbar />
         <main className="min-h-screen">
-          <PageTransition>{children}</PageTransition>
+          {children}
         </main>
         <Footer />
         <StickyCTA />

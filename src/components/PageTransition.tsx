@@ -6,7 +6,6 @@ import { useEffect, useState, type ReactNode } from "react";
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
-  const [currentChildren, setCurrentChildren] = useState(children);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -14,16 +13,12 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (reducedMotion) {
-      setCurrentChildren(children);
-      return;
-    }
+    if (reducedMotion) return;
 
     setVisible(false);
     const timeout = setTimeout(() => {
-      setCurrentChildren(children);
       setVisible(true);
-    }, 200);
+    }, 150);
 
     return () => clearTimeout(timeout);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,10 +30,13 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="transition-opacity duration-300 ease-in-out"
-      style={{ opacity: visible ? 1 : 0 }}
+      style={{
+        opacity: visible ? 1 : 0,
+        transition: "opacity 200ms ease-in-out",
+        minHeight: "100vh",
+      }}
     >
-      {currentChildren}
+      {children}
     </div>
   );
 }

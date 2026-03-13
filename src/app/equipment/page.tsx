@@ -60,21 +60,25 @@ export default function EquipmentPage() {
 
   // Track filter changes to trigger card enter/exit transitions
   const [animatingIn, setAnimatingIn] = useState(true);
-  const prevFilteredRef = useRef<string[]>([]);
+  const prevFilteredRef = useRef<string[] | null>(null);
 
   useEffect(() => {
     const currentIds = filtered.map((e) => e.id);
     const prevIds = prevFilteredRef.current;
+
+    // Skip animation on initial mount
+    if (prevIds === null) {
+      prevFilteredRef.current = currentIds;
+      return;
+    }
 
     // If the filtered set changed, trigger transition
     if (
       currentIds.length !== prevIds.length ||
       currentIds.some((id, i) => id !== prevIds[i])
     ) {
-      // First frame: reset cards to hidden (scale down + opacity 0)
       setAnimatingIn(false);
 
-      // Next frame: animate them in with stagger
       const raf = requestAnimationFrame(() => {
         setAnimatingIn(true);
       });
