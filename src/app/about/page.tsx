@@ -128,7 +128,7 @@ export default function AboutPage() {
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {brands.map((brand, i) => (
-              <FadeIn key={brand} delay={i * 0.06}>
+              <FadeIn key={brand} delay={i * 0.1} className="fade-in-short">
                 <div className="bg-brand-gray-dark rounded-lg border border-purple/20 px-8 py-7 text-center hover:border-purple/50 transition-colors">
                   <span className="font-heading font-bold text-xl uppercase text-brand-white">
                     {brand}

@@ -40,7 +40,7 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                     activeCategory === cat
                       ? "bg-purple text-white"
                       : "bg-brand-gray-dark text-brand-gray hover:text-white hover:bg-brand-gray-dark/80 border border-purple/20"
@@ -57,7 +57,7 @@ export default function BlogPage() {
             <FadeIn>
               <Link
                 href={`/blog/${filtered[0].slug}`}
-                className="group block bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden hover:border-purple/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(123,45,142,0.12)] mb-12"
+                className="group block bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden hover:border-purple/50 hover:-translate-y-1 cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(123,45,142,0.18)] mb-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div className="relative h-[300px] overflow-hidden">
@@ -65,11 +65,12 @@ export default function BlogPage() {
                       src={filtered[0].featuredImage}
                       alt={filtered[0].title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#2A2A2A]/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#2A2A2A]/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-dark/60 via-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <Badge className="absolute top-4 left-4 bg-purple/80 text-white border-0 text-xs">
                       {filtered[0].category}
                     </Badge>
@@ -97,8 +98,8 @@ export default function BlogPage() {
                         <Clock className="w-3.5 h-3.5" />
                         {filtered[0].readTime}
                       </span>
-                      <span className="text-xs font-semibold uppercase tracking-wide text-purple-accent group-hover:translate-x-1 transition-transform flex items-center gap-1 ml-auto">
-                        Read Article <ArrowRight className="w-3.5 h-3.5" />
+                      <span className="text-xs font-semibold uppercase tracking-wide text-purple-accent group-hover:translate-x-1 transition-all duration-300 flex items-center gap-1 ml-auto">
+                        Read Article <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </div>
                   </div>
@@ -113,7 +114,7 @@ export default function BlogPage() {
               <FadeIn key={post.id} delay={i * 0.08}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden hover:border-purple/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(123,45,142,0.12)]"
+                  className="group block bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden hover:border-purple/50 hover:-translate-y-1 cursor-pointer transition-all duration-300 hover:shadow-[0_8px_30px_rgba(123,45,142,0.12)]"
                 >
                   <div className="relative h-[220px] overflow-hidden">
                     <Image

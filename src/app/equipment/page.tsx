@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { SlidersHorizontal, LayoutGrid, List } from "lucide-react";
 import PageHero from "@/components/PageHero";
-import FadeIn from "@/components/FadeIn";
 import EquipmentCard from "@/components/EquipmentCard";
 import { equipment } from "@/data/equipment";
 
@@ -58,6 +57,32 @@ export default function EquipmentPage() {
 
     return items;
   }, [category, status, manufacturer, sort]);
+
+  // Track filter changes to trigger card enter/exit transitions
+  const [animatingIn, setAnimatingIn] = useState(true);
+  const prevFilteredRef = useRef<string[]>([]);
+
+  useEffect(() => {
+    const currentIds = filtered.map((e) => e.id);
+    const prevIds = prevFilteredRef.current;
+
+    // If the filtered set changed, trigger transition
+    if (
+      currentIds.length !== prevIds.length ||
+      currentIds.some((id, i) => id !== prevIds[i])
+    ) {
+      // First frame: reset cards to hidden (scale down + opacity 0)
+      setAnimatingIn(false);
+
+      // Next frame: animate them in with stagger
+      const raf = requestAnimationFrame(() => {
+        setAnimatingIn(true);
+      });
+
+      prevFilteredRef.current = currentIds;
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [filtered]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -266,9 +291,17 @@ export default function EquipmentPage() {
               {filtered.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {filtered.map((item, i) => (
-                    <FadeIn key={item.id} delay={i * 0.05}>
+                    <div
+                      key={item.id}
+                      className={`transition-all duration-300 ease-out ${
+                        animatingIn
+                          ? "opacity-100 scale-100"
+                          : "opacity-0 scale-95"
+                      }`}
+                      style={{ transitionDelay: `${i * 50}ms` }}
+                    >
                       <EquipmentCard equipment={item} />
-                    </FadeIn>
+                    </div>
                   ))}
                 </div>
               ) : (

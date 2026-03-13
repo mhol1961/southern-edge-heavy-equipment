@@ -212,16 +212,20 @@ function ContactPageInner() {
                               {s < step ? <CheckCircle className="w-4 h-4" /> : s + 1}
                             </div>
                             {s < 3 && (
-                              <div
-                                className={`w-8 h-0.5 mx-1 ${
-                                  s < step ? "bg-purple" : "bg-brand-black-light"
-                                }`}
-                              />
+                              <div className="w-8 h-0.5 mx-1 bg-brand-black-light relative overflow-hidden rounded-full">
+                                <div
+                                  className={`absolute inset-0 bg-purple transition-transform duration-500 ease-out origin-left ${
+                                    s < step ? "scale-x-100" : "scale-x-0"
+                                  }`}
+                                />
+                              </div>
                             )}
                           </div>
                         ))}
                       </div>
 
+                      {/* Step content with slide transition */}
+                      <div key={step} className="step-enter">
                       {/* Step 0: Inquiry type */}
                       {step === 0 && (
                         <div>
@@ -388,6 +392,7 @@ function ContactPageInner() {
                           </p>
                         </div>
                       )}
+                      </div>
 
                       {/* Navigation */}
                       <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-purple/10">

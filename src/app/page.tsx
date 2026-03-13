@@ -1,11 +1,15 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, ArrowRight, Star, MapPin, Mail, Clock, Check, ChevronDown } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import FadeIn from "@/components/FadeIn";
 import EquipmentCard from "@/components/EquipmentCard";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import TiltCard from "@/components/TiltCard";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { equipment } from "@/data/equipment";
 import { categories } from "@/data/categories";
 import { services } from "@/data/services";
@@ -13,10 +17,10 @@ import { testimonials } from "@/data/testimonials";
 
 const featuredEquipment = equipment.filter((e) => e.featured).slice(0, 6);
 
-const stats = [
-  { value: "500+", label: "Products In Stock" },
-  { value: "48hr", label: "Turnaround" },
-  { value: "15+", label: "Years Experience" },
+const statConfig = [
+  { target: 500, suffix: "+", label: "Products In Stock", duration: 2000 },
+  { target: 48, suffix: "hr", label: "Turnaround", duration: 1500 },
+  { target: 15, suffix: "+", label: "Years Experience", duration: 1000 },
 ];
 
 const testimonialImages = [
@@ -26,21 +30,50 @@ const testimonialImages = [
 ];
 
 export default function Home() {
+  // Hero parallax
+  const heroRef = useRef<HTMLElement>(null);
+  const [parallaxY, setParallaxY] = useState(0);
+
+  useEffect(() => {
+    const isTouch = "ontouchstart" in window;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isTouch || reducedMotion) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setParallaxY(window.scrollY * 0.3);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       {/* ===== CINEMATIC HERO ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Full-bleed background image */}
-        <Image
-          src="/images/southernedgeheavyequipment2.jpeg"
-          alt="Pegson XA400S Mobile Jaw Crusher — Southern Edge Heavy Equipment"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Full-bleed background image with parallax */}
+        <div
+          className="absolute inset-0 will-change-transform"
+          style={{ transform: `translateY(${parallaxY}px)` }}
+        >
+          <Image
+            src="/images/southernedgeheavyequipment2.jpeg"
+            alt="Pegson XA400S Mobile Jaw Crusher — Southern Edge Heavy Equipment"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
 
-        {/* Multi-layer overlay: top fade, bottom fade, left fade for text */}
+        {/* Multi-layer overlay */}
         <div className="hero-overlay" />
 
         {/* Subtle grid pattern */}
@@ -60,23 +93,23 @@ export default function Home() {
               </span>
             </div>
 
-            {/* MASSIVE heading */}
-            <h1
-              className="mt-6 font-heading font-bold text-[clamp(42px,7vw,80px)] uppercase leading-[0.95] tracking-[-0.02em] text-white animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
-            >
-              Screens. Belting.
-              <br />
-              Parts.{" "}
-              <span className="text-purple-accent">
-                Machines.
+            {/* MASSIVE heading with text reveal */}
+            <h1 className="mt-6 font-heading font-bold text-[clamp(42px,7vw,80px)] uppercase leading-[0.95] tracking-[-0.02em] text-white">
+              <span className="block text-reveal" style={{ animationDelay: "0.2s" }}>
+                Screens. Belting.
+              </span>
+              <span className="block text-reveal" style={{ animationDelay: "0.35s" }}>
+                Parts.{" "}
+                <span className="text-purple-accent text-reveal inline-block" style={{ animationDelay: "0.55s" }}>
+                  Machines.
+                </span>
               </span>
             </h1>
 
             {/* Subtext */}
             <p
               className="mt-6 text-[17px] text-brand-gray-light/80 max-w-[480px] leading-relaxed animate-fade-in"
-              style={{ animationDelay: "0.35s" }}
+              style={{ animationDelay: "0.5s" }}
             >
               Southern Edge supplies screening media, conveyor belting, crusher wear
               parts, and material processing machines to aggregate, mining, and
@@ -86,7 +119,7 @@ export default function Home() {
             {/* Dual CTAs */}
             <div
               className="mt-8 flex flex-wrap gap-4 animate-fade-in"
-              style={{ animationDelay: "0.5s" }}
+              style={{ animationDelay: "0.65s" }}
             >
               <Link
                 href="/equipment"
@@ -104,22 +137,25 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Stats bar */}
+            {/* Animated Stats bar */}
             <div
               className="mt-10 flex flex-wrap items-center gap-6 animate-fade-in"
-              style={{ animationDelay: "0.65s" }}
+              style={{ animationDelay: "0.8s" }}
             >
-              {stats.map((stat, i) => (
+              {statConfig.map((stat, i) => (
                 <div key={i} className="flex items-center gap-6">
                   <div>
-                    <div className="font-heading font-bold text-2xl text-white leading-none">
-                      {stat.value}
-                    </div>
+                    <AnimatedCounter
+                      target={stat.target}
+                      suffix={stat.suffix}
+                      duration={stat.duration}
+                      className="font-heading font-bold text-2xl text-white leading-none"
+                    />
                     <div className="text-[11px] uppercase tracking-[0.12em] text-brand-gray mt-1">
                       {stat.label}
                     </div>
                   </div>
-                  {i < stats.length - 1 && (
+                  {i < statConfig.length - 1 && (
                     <div className="hidden sm:block w-px h-10 bg-brand-gray/20" />
                   )}
                 </div>
@@ -127,10 +163,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Floating featured card — bottom right, over the visible equipment */}
+          {/* Floating featured card */}
           <div
             className="hidden lg:block absolute bottom-24 right-8 xl:right-16 z-20 animate-fade-in"
-            style={{ animationDelay: "0.7s" }}
+            style={{ animationDelay: "0.9s" }}
           >
             <div className="bg-black/60 backdrop-blur-xl rounded-xl border border-purple/30 p-5 min-w-[280px] shadow-2xl">
               <span className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] text-purple-accent">
@@ -152,7 +188,7 @@ export default function Home() {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce" aria-hidden="true">
             <ChevronDown className="w-6 h-6 text-white/40" />
           </div>
         </div>
@@ -182,9 +218,9 @@ export default function Home() {
                           ? "/parts"
                           : "/equipment"
                   }
-                  className="group block rounded-lg overflow-hidden card-hover border border-purple/20"
+                  className="group block rounded-lg overflow-hidden card-hover border border-purple/20 cursor-pointer"
                 >
-                  {/* Tall image with zoom */}
+                  {/* Tall image with zoom + purple overlay on hover */}
                   <div className="relative h-[280px] img-zoom">
                     <Image
                       src={cat.image}
@@ -193,10 +229,12 @@ export default function Home() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    {/* Purple gradient overlay on bottom 40% */}
+                    {/* Bottom fade */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/40 to-transparent" />
+                    {/* Purple tint overlay on hover */}
+                    <div className="absolute inset-0 bg-purple/0 group-hover:bg-purple/15 transition-colors duration-500" />
                   </div>
-                  {/* Title overlapping image with negative margin */}
+                  {/* Title overlapping image */}
                   <div className="relative -mt-8 z-10 px-5 pb-5">
                     <h3 className="font-heading font-bold text-xl uppercase text-white group-hover:text-purple-accent transition-colors leading-tight">
                       {cat.name}
@@ -204,8 +242,8 @@ export default function Home() {
                     <p className="text-sm text-brand-gray-light/60 mt-2 leading-relaxed">
                       {cat.description}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-purple-accent mt-4 group-hover:translate-x-1 transition-transform">
-                      View Products <ArrowRight className="w-3.5 h-3.5" />
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-purple-accent mt-4 translate-y-0 group-hover:-translate-y-1 transition-transform duration-300">
+                      View Products <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                     </span>
                   </div>
                 </Link>
@@ -238,7 +276,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredEquipment.map((item, i) => (
               <FadeIn key={item.id} delay={i * 0.08}>
-                <EquipmentCard equipment={item} />
+                <TiltCard>
+                  <EquipmentCard equipment={item} />
+                </TiltCard>
               </FadeIn>
             ))}
           </div>
@@ -259,10 +299,12 @@ export default function Home() {
             {services.map((service, i) => (
               <FadeIn key={service.id} delay={i * 0.06}>
                 <div className="group relative bg-brand-gray-dark rounded-xl border border-purple/20 p-8 md:p-10 hover:border-purple/50 transition-all overflow-hidden">
-                  {/* Number as massive visual anchor */}
                   <div className="flex flex-col md:flex-row gap-6 md:gap-10">
                     <div className="shrink-0">
-                      <span className="font-heading font-bold text-[72px] md:text-[80px] leading-none text-purple-accent/30 group-hover:text-purple-accent/50 transition-colors">
+                      <span
+                        className="font-heading font-bold text-[72px] md:text-[80px] leading-none text-purple-accent/30 group-hover:text-purple-accent/50 transition-colors number-glow"
+                        style={{ animationDelay: `${i * 0.5}s` }}
+                      >
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -273,7 +315,6 @@ export default function Home() {
                       <p className="text-[15px] text-brand-gray-light/70 mt-3 leading-relaxed max-w-2xl">
                         {service.description}
                       </p>
-                      {/* 2-column bullet grid */}
                       {service.details && (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mt-5">
                           {service.details.map((detail, j) => (
@@ -309,53 +350,13 @@ export default function Home() {
             </h2>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.slice(0, 3).map((t, i) => (
-              <FadeIn key={t.id} delay={i * 0.1}>
-                <div className="relative bg-brand-gray-dark rounded-xl border border-purple/20 overflow-hidden h-full flex flex-col card-hover">
-                  {/* Background image with heavy overlay */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={testimonialImages[i % testimonialImages.length]}
-                      alt=""
-                      fill
-                      className="object-cover opacity-15"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                  <div className="relative z-10 p-8 flex flex-col h-full">
-                    {/* Enormous quote mark */}
-                    <span className="absolute top-4 left-6 font-heading text-[120px] leading-none text-purple-accent/20 select-none">
-                      &ldquo;
-                    </span>
-                    {/* Star rating */}
-                    <div className="flex gap-1 mb-4 relative z-10">
-                      {[...Array(5)].map((_, j) => (
-                        <Star key={j} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                      ))}
-                    </div>
-                    <p className="text-brand-gray-light italic leading-relaxed flex-1 relative z-10 text-[15px]">
-                      &ldquo;{t.text}&rdquo;
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-purple/10 relative z-10">
-                      <p className="font-heading font-bold text-sm uppercase text-white">
-                        {t.name}
-                      </p>
-                      <p className="text-xs text-purple-accent mt-1">
-                        {t.role}, {t.company}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={testimonials} images={testimonialImages} />
         </div>
       </section>
 
-      {/* ===== CTA BANNER ===== */}
+      {/* ===== CTA BANNER — Animated Gradient ===== */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-dark to-purple" />
+        <div className="absolute inset-0 cta-gradient-animated" />
         <div className="absolute inset-0 stripe-texture" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <FadeIn>
@@ -369,7 +370,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg"
+                className="inline-flex items-center px-8 py-4 font-heading font-bold uppercase tracking-wide text-purple-dark rounded-lg bg-white hover:bg-brand-gray-light transition-all hover:shadow-lg cursor-pointer"
               >
                 Request a Quote
               </Link>
@@ -389,39 +390,28 @@ export default function Home() {
       <section className="py-24 bg-brand-black-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left — contact info */}
             <FadeIn>
               <SectionLabel text="Get In Touch" />
               <h2 className="font-heading font-bold text-[clamp(32px,4.5vw,48px)] uppercase tracking-tight text-white mb-8">
                 Contact Us
               </h2>
               <div className="space-y-5">
-                <a
-                  href="tel:1-800-234-7890"
-                  className="flex items-center gap-4 group"
-                >
+                <a href="tel:1-800-234-7890" className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-12 h-12 rounded-xl bg-purple/20 flex items-center justify-center group-hover:bg-purple/40 group-hover:shadow-[0_0_15px_rgba(123,45,142,0.3)] transition-all">
                     <Phone className="w-5 h-5 text-purple-accent" />
                   </div>
                   <div>
                     <p className="text-sm text-brand-gray">Phone</p>
-                    <p className="font-heading font-bold text-white">
-                      1-800-234-7890
-                    </p>
+                    <p className="font-heading font-bold text-white">1-800-234-7890</p>
                   </div>
                 </a>
-                <a
-                  href="mailto:info@southernedgescreens.com"
-                  className="flex items-center gap-4 group"
-                >
+                <a href="mailto:info@southernedgescreens.com" className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-12 h-12 rounded-xl bg-purple/20 flex items-center justify-center group-hover:bg-purple/40 group-hover:shadow-[0_0_15px_rgba(123,45,142,0.3)] transition-all">
                     <Mail className="w-5 h-5 text-purple-accent" />
                   </div>
                   <div>
                     <p className="text-sm text-brand-gray">Email</p>
-                    <p className="font-heading font-bold text-white">
-                      info@southernedgescreens.com
-                    </p>
+                    <p className="font-heading font-bold text-white">info@southernedgescreens.com</p>
                   </div>
                 </a>
                 <div className="flex items-center gap-4">
@@ -430,9 +420,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-brand-gray">Service Area</p>
-                    <p className="font-heading font-bold text-white">
-                      Southeast United States
-                    </p>
+                    <p className="font-heading font-bold text-white">Southeast United States</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -441,15 +429,12 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-brand-gray">Hours</p>
-                    <p className="font-heading font-bold text-white">
-                      Mon–Fri 7AM – 5PM EST
-                    </p>
+                    <p className="font-heading font-bold text-white">Mon–Fri 7AM – 5PM EST</p>
                   </div>
                 </div>
               </div>
             </FadeIn>
 
-            {/* Right — quick form */}
             <FadeIn delay={0.15}>
               <div className="bg-brand-gray-dark rounded-xl border border-purple/20 p-8">
                 <h3 className="font-heading font-bold text-xl uppercase text-white mb-6">
@@ -473,7 +458,7 @@ export default function Home() {
                     placeholder="Phone Number"
                     className="w-full px-4 py-3 rounded-lg bg-brand-black-light border border-[#333] text-white placeholder:text-brand-gray focus:outline-none focus:border-purple transition-colors"
                   />
-                  <select className="w-full px-4 py-3 rounded-lg bg-brand-black-light border border-[#333] text-brand-gray focus:outline-none focus:border-purple transition-colors">
+                  <select className="w-full px-4 py-3 rounded-lg bg-brand-black-light border border-[#333] text-brand-gray focus:outline-none focus:border-purple transition-colors cursor-pointer">
                     <option value="">What type of equipment or parts do you need?</option>
                     <option value="screens">Screening Media</option>
                     <option value="belting">Conveyor Belting</option>

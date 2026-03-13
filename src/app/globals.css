@@ -143,6 +143,10 @@ html {
   transform: translateY(0);
 }
 
+.fade-in-up.fade-in-short {
+  transform: translateY(20px);
+}
+
 /* Staggered entrance for hero elements */
 @keyframes fadeIn {
   from {
@@ -255,9 +259,11 @@ html {
 }
 
 /* ========================================
-   BUTTON STYLES
+   BUTTON STYLES — Glow + Ripple
    ======================================== */
 .btn-primary {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, #7B2D8E, #5A1A6E);
   color: white;
   font-family: var(--font-oswald), sans-serif;
@@ -266,14 +272,37 @@ html {
   letter-spacing: 0.05em;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #9B4DBA, #7B2D8E);
-  box-shadow: 0 0 25px rgba(123, 45, 142, 0.4), 0 0 50px rgba(123, 45, 142, 0.15);
+  box-shadow: 0 0 30px rgba(123, 45, 142, 0.5), 0 0 60px rgba(123, 45, 142, 0.2);
+  transform: scale(1.02);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Ripple effect */
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn-primary:active::after {
+  opacity: 1;
+  transition: opacity 0s;
 }
 
 .btn-secondary {
+  position: relative;
   background: transparent;
   color: white;
   font-family: var(--font-oswald), sans-serif;
@@ -282,11 +311,108 @@ html {
   letter-spacing: 0.05em;
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
   border-color: #C084FC;
   color: #C084FC;
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.15);
+  transform: scale(1.02);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ========================================
+   HERO TEXT REVEAL — clip-path wipe
+   ======================================== */
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+.text-reveal {
+  clip-path: inset(0 100% 0 0);
+  animation: textReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================
+   SERVICE NUMBER GLOW PULSE
+   ======================================== */
+@keyframes numberGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(192, 132, 252, 0.15); }
+  50% { text-shadow: 0 0 40px rgba(192, 132, 252, 0.35), 0 0 60px rgba(123, 45, 142, 0.15); }
+}
+
+.number-glow {
+  animation: numberGlow 3s ease-in-out infinite;
+}
+
+/* ========================================
+   CTA GRADIENT ANIMATION
+   ======================================== */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cta-gradient-animated {
+  background: linear-gradient(135deg, #5A1A6E, #7B2D8E, #9B4DBA, #7B2D8E, #5A1A6E);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* ========================================
+   SLIDE-IN-LEFT for headings
+   ======================================== */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================================
+   FORM STEP TRANSITIONS
+   ======================================== */
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-30px); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.step-enter {
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.step-exit {
+  animation: slideOutLeft 0.3s ease forwards;
 }
 
 /* ========================================
@@ -304,4 +430,41 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7B2D8E;
+}
+
+/* ========================================
+   REDUCED MOTION — Accessibility
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up,
+  .slide-in-left,
+  .animate-fade-in,
+  .text-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .img-zoom:hover img {
+    transform: none;
+  }
+
+  .number-glow {
+    animation: none !important;
+  }
+
+  .cta-gradient-animated {
+    animation: none !important;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
 }

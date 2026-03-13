@@ -28,6 +28,7 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -39,7 +40,14 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let lastY = 0;
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      // Compact mode when scrolled past the hero area
+      setCompact(y > 300);
+      lastY = y;
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -59,11 +67,11 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0A0A0A]/95 backdrop-blur-md border-b border-purple/20 shadow-lg shadow-black/20"
-          : "bg-[#0A0A0A]/80 backdrop-blur-sm"
+          ? "bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-purple/20 shadow-lg shadow-black/30"
+          : "bg-[#0A0A0A]/60 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-[160px] flex items-center justify-between">
+      <div className={`max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between transition-all duration-300 ${compact ? "h-[100px]" : "h-[160px]"}`}>
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image
@@ -71,7 +79,7 @@ export default function Navbar() {
             alt="Southern Edge Screens & Belting"
             width={500}
             height={100}
-            className="h-[150px] w-auto"
+            className={`w-auto transition-all duration-300 ${compact ? "h-[90px]" : "h-[150px]"}`}
             priority
           />
         </Link>
